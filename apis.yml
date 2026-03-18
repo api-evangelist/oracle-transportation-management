@@ -1,0 +1,18 @@
+aid: oracle-transportation-management
+url: https://raw.githubusercontent.com/api-evangelist/oracle-transportation-management/refs/heads/main/apis.yml
+apis:
+- aid: oracle-transportation-management:oracle-transportation-management-api
+  name: Oracle Transportation Management API
+  tags:
+  - Logistics
+  - Transportation
+  - Freight
+  - SOAP
+  image: https://raw.githubusercontent.com/api-evangelist/oracle-transportation-management/refs/heads/main/image.png
+  humanURL: https://docs.oracle.com/en/cloud/saas/transport-management/
+  baseURL: https://api.oracle-otm.example.com
+  properties:
+  - url: https://docs.oracle.com/en/cloud/saas/transport-management/
+    type: Documentation
+  description: >-
+    Oracle Transportation Management (OTM) provides freight planning and execution APIs for global logistics. REST and SOAP APIs enable shipment planning, carrier selection, freight payment, and transportation visibility across multi-modal supply chains.
