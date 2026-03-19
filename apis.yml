@@ -16,6 +16,8 @@ apis:
     type: Documentation
   - url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
     type: Reference
+  - url: openapi/oracle-otm-business-objects-openapi.yml
+    type: OpenAPI
   description: >-
     Oracle Transportation Management Business Object Resources REST API enables programmatic access to in-system data and integrations with shipment orders, carriers, lanes, rates, and transportation plans in Oracle Fusion Cloud Transportation and Global Trade Management.
 
@@ -54,6 +56,12 @@ common:
   type: DeveloperPortal
 - url: https://github.com/oracle
   type: GitHubOrganization
+- url: openapi/oracle-otm-business-objects-openapi.yml
+  type: OpenAPI
+- url: json-schema/oracle-otm-shipment-order-schema.json
+  type: JSONSchema
+- url: json-ld/oracle-otm-context.jsonld
+  type: JSONLDContext
 maintainers:
 - name: Kin Lane
   email: kin@apievangelist.com

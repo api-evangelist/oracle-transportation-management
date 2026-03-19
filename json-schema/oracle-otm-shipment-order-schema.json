@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/oracle-transportation-management/json-schema/oracle-otm-shipment-order-schema.json",
+  "title": "Oracle OTM Shipment Order",
+  "description": "Schema for an Oracle Transportation Management shipment order (order to move), representing a request to transport goods from one location to another.",
+  "type": "object",
+  "properties": {
+    "shipmentOrderGid": {
+      "type": "string",
+      "description": "Global identifier in domain.xid format"
+    },
+    "shipmentOrderXid": {
+      "type": "string",
+      "description": "User-defined order identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["I", "OB", "PL", "DP", "IT", "DL", "CL"],
+      "description": "I=Initial, OB=Open-Booked, PL=Planned, DP=Dispatched, IT=InTransit, DL=Delivered, CL=Closed"
+    },
+    "sourceLocationGid": {
+      "type": "string",
+      "description": "Origin location GID"
+    },
+    "destLocationGid": {
+      "type": "string",
+      "description": "Destination location GID"
+    },
+    "earlyPickupDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Earliest allowable pickup date"
+    },
+    "latePickupDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Latest allowable pickup date"
+    },
+    "earlyDeliveryDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lateDeliveryDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Required delivery date"
+    },
+    "transportationMode": {
+      "type": "string",
+      "enum": ["LTL", "TL", "OCEAN", "AIR", "RAIL", "PARCEL", "INTERMODAL"]
+    },
+    "totalWeight": {
+      "type": "number",
+      "description": "Total shipment weight"
+    },
+    "totalWeightUom": {
+      "type": "string",
+      "enum": ["LB", "KG", "T", "MT"],
+      "description": "Weight unit of measure"
+    },
+    "totalVolume": {
+      "type": "number"
+    },
+    "totalVolumeUom": {
+      "type": "string"
+    },
+    "lines": {
+      "type": "array",
+      "description": "Shipment order line items",
+      "items": {
+        "$ref": "#/$defs/ShipmentOrderLine"
+      }
+    },
+    "insertDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdateDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["shipmentOrderXid", "sourceLocationGid", "destLocationGid", "lateDeliveryDate"],
+  "$defs": {
+    "ShipmentOrderLine": {
+      "type": "object",
+      "properties": {
+        "lineNumber": { "type": "integer" },
+        "itemGid": { "type": "string" },
+        "itemDescription": { "type": "string" },
+        "quantity": { "type": "number" },
+        "quantityUom": { "type": "string" },
+        "weight": { "type": "number" },
+        "weightUom": { "type": "string", "enum": ["LB", "KG", "T", "MT"] },
+        "volume": { "type": "number" },
+        "volumeUom": { "type": "string" },
+        "packageType": { "type": "string" }
+      },
+      "required": ["lineNumber", "quantity", "quantityUom"]
+    }
+  },
+  "examples": [
+    {
+      "shipmentOrderXid": "SO-2026-00456",
+      "shipmentOrderGid": "ACME.SO-2026-00456",
+      "status": "PL",
+      "sourceLocationGid": "ACME.CHICAGO-WH",
+      "destLocationGid": "ACME.DALLAS-DC",
+      "earlyPickupDate": "2026-03-20T07:00:00Z",
+      "latePickupDate": "2026-03-20T17:00:00Z",
+      "earlyDeliveryDate": "2026-03-22T07:00:00Z",
+      "lateDeliveryDate": "2026-03-22T17:00:00Z",
+      "transportationMode": "TL",
+      "totalWeight": 42000,
+      "totalWeightUom": "LB"
+    }
+  ]
+}

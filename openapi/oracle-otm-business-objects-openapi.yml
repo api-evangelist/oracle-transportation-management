@@ -1,0 +1,628 @@
+openapi: 3.1.0
+info:
+  title: Oracle Transportation Management Business Object Resources REST API
+  description: >-
+    Oracle Transportation Management (OTM) Business Object Resources REST API
+    provides programmatic access to shipment orders, carriers, lanes, rates,
+    transportation plans, and logistics data in Oracle Fusion Cloud Transportation
+    and Global Trade Management.
+  version: 26b.0.0
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms/
+servers:
+  - url: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+    description: OTM REST API endpoint
+    variables:
+      host:
+        default: otm.example.com
+
+security:
+  - oauth2: []
+
+tags:
+  - name: ShipmentOrders
+    description: Shipment order management
+  - name: Carriers
+    description: Carrier master data
+  - name: Lanes
+    description: Lane and routing management
+  - name: Rates
+    description: Rate records and freight costs
+  - name: TransportationPlans
+    description: Transportation plan management
+  - name: Locations
+    description: Location master data
+
+paths:
+  /shipment-orders:
+    get:
+      operationId: listShipmentOrders
+      summary: List shipment orders
+      description: Returns shipment orders (orders to move) with status, routing, and carrier assignments.
+      tags:
+        - ShipmentOrders
+      parameters:
+        - name: status
+          in: query
+          description: Filter by order status
+          schema:
+            type: string
+            enum: [I, OB, PL, DP, IT, DL, CL]
+        - name: startDate
+          in: query
+          description: Early pickup date filter (ISO 8601)
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: sourceLocationGid
+          in: query
+          description: Filter by origin location GID
+          schema:
+            type: string
+        - name: destLocationGid
+          in: query
+          description: Filter by destination location GID
+          schema:
+            type: string
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+            maximum: 1000
+      responses:
+        '200':
+          description: Shipment order list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shipmentOrders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ShipmentOrder'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createShipmentOrder
+      summary: Create a shipment order
+      description: Creates a new shipment order (order to move) in OTM.
+      tags:
+        - ShipmentOrders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentOrderCreate'
+      responses:
+        '201':
+          description: Shipment order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentOrder'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /shipment-orders/{gid}:
+    get:
+      operationId: getShipmentOrder
+      summary: Get a shipment order
+      description: Returns full shipment order details including lines, references, and routing.
+      tags:
+        - ShipmentOrders
+      parameters:
+        - $ref: '#/components/parameters/GidParam'
+      responses:
+        '200':
+          description: Shipment order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentOrderDetail'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateShipmentOrder
+      summary: Update a shipment order
+      description: Updates mutable fields on a shipment order.
+      tags:
+        - ShipmentOrders
+      parameters:
+        - $ref: '#/components/parameters/GidParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentOrderUpdate'
+      responses:
+        '200':
+          description: Order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentOrder'
+    delete:
+      operationId: deleteShipmentOrder
+      summary: Delete a shipment order
+      description: Deletes a shipment order in Draft status.
+      tags:
+        - ShipmentOrders
+      parameters:
+        - $ref: '#/components/parameters/GidParam'
+      responses:
+        '204':
+          description: Deleted
+
+  /carriers:
+    get:
+      operationId: listCarriers
+      summary: List carriers
+      description: Returns carrier master data including SCAC codes and service levels.
+      tags:
+        - Carriers
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [A, I]
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Carrier list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  carriers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Carrier'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /carriers/{gid}:
+    get:
+      operationId: getCarrier
+      summary: Get a carrier
+      description: Returns carrier details including service offerings and contact information.
+      tags:
+        - Carriers
+      parameters:
+        - $ref: '#/components/parameters/GidParam'
+      responses:
+        '200':
+          description: Carrier details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carrier'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /locations:
+    get:
+      operationId: listLocations
+      summary: List locations
+      description: Returns location master data including addresses and coordinates.
+      tags:
+        - Locations
+      parameters:
+        - name: locationType
+          in: query
+          schema:
+            type: string
+        - name: country
+          in: query
+          schema:
+            type: string
+            maxLength: 3
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Location list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Location'
+                  totalCount:
+                    type: integer
+
+  /rates:
+    get:
+      operationId: listRates
+      summary: List rate records
+      description: Returns freight rate records applicable to lanes and carriers.
+      tags:
+        - Rates
+      parameters:
+        - name: carrierGid
+          in: query
+          schema:
+            type: string
+        - name: effectiveDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Rate list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Rate'
+                  totalCount:
+                    type: integer
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.oracle.com/oauth2/v1/token
+          scopes:
+            otm.read: Read OTM data
+            otm.write: Write OTM data
+
+  parameters:
+    GidParam:
+      name: gid
+      in: path
+      required: true
+      description: OTM Global Identifier (domainName.xid format)
+      schema:
+        type: string
+        pattern: '^[A-Z0-9_]+\.[A-Z0-9_-]+$'
+
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    ShipmentOrder:
+      type: object
+      description: An OTM shipment order (order to move)
+      properties:
+        shipmentOrderGid:
+          type: string
+          description: Global identifier (domain.xid format)
+        shipmentOrderXid:
+          type: string
+          description: User-defined order ID
+        status:
+          type: string
+          enum: [I, OB, PL, DP, IT, DL, CL]
+          description: "I=Initial, OB=Open-Booked, PL=Planned, DP=Dispatched, IT=InTransit, DL=Delivered, CL=Closed"
+        sourceLocationGid:
+          type: string
+          description: Origin location GID
+        destLocationGid:
+          type: string
+          description: Destination location GID
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+        transportationMode:
+          type: string
+          enum: [LTL, TL, OCEAN, AIR, RAIL, PARCEL, INTERMODAL]
+        totalWeight:
+          type: number
+          format: double
+        totalWeightUom:
+          type: string
+          enum: [LB, KG, T, MT]
+        totalVolume:
+          type: number
+          format: double
+        totalVolumeUom:
+          type: string
+        insertDate:
+          type: string
+          format: date-time
+        lastUpdateDate:
+          type: string
+          format: date-time
+
+    ShipmentOrderCreate:
+      type: object
+      required:
+        - shipmentOrderXid
+        - sourceLocationGid
+        - destLocationGid
+        - earlyPickupDate
+        - lateDeliveryDate
+      properties:
+        shipmentOrderXid:
+          type: string
+        sourceLocationGid:
+          type: string
+        destLocationGid:
+          type: string
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+        transportationMode:
+          type: string
+          enum: [LTL, TL, OCEAN, AIR, RAIL, PARCEL, INTERMODAL]
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentOrderLineCreate'
+
+    ShipmentOrderUpdate:
+      type: object
+      properties:
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+
+    ShipmentOrderDetail:
+      allOf:
+        - $ref: '#/components/schemas/ShipmentOrder'
+        - type: object
+          properties:
+            lines:
+              type: array
+              items:
+                $ref: '#/components/schemas/ShipmentOrderLine'
+            references:
+              type: array
+              items:
+                type: object
+                properties:
+                  refType:
+                    type: string
+                  refValue:
+                    type: string
+
+    ShipmentOrderLine:
+      type: object
+      properties:
+        lineNumber:
+          type: integer
+        itemGid:
+          type: string
+        itemDescription:
+          type: string
+        quantity:
+          type: number
+          format: double
+        quantityUom:
+          type: string
+        weight:
+          type: number
+          format: double
+        weightUom:
+          type: string
+        volume:
+          type: number
+          format: double
+        volumeUom:
+          type: string
+        packageType:
+          type: string
+
+    ShipmentOrderLineCreate:
+      type: object
+      required:
+        - lineNumber
+        - quantity
+        - quantityUom
+      properties:
+        lineNumber:
+          type: integer
+        itemGid:
+          type: string
+        itemDescription:
+          type: string
+        quantity:
+          type: number
+          format: double
+        quantityUom:
+          type: string
+        weight:
+          type: number
+          format: double
+        weightUom:
+          type: string
+
+    Carrier:
+      type: object
+      properties:
+        servprovGid:
+          type: string
+          description: Service provider GID
+        servprovXid:
+          type: string
+          description: Carrier identifier (SCAC or internal)
+        name:
+          type: string
+        scacCode:
+          type: string
+          maxLength: 4
+          description: Standard Carrier Alpha Code
+        status:
+          type: string
+          enum: [A, I]
+        transportationModes:
+          type: array
+          items:
+            type: string
+        contactName:
+          type: string
+        contactPhone:
+          type: string
+        contactEmail:
+          type: string
+          format: email
+        insertDate:
+          type: string
+          format: date-time
+
+    Location:
+      type: object
+      properties:
+        locationGid:
+          type: string
+        locationXid:
+          type: string
+        locationName:
+          type: string
+        locationType:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+          maxLength: 3
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+
+    Rate:
+      type: object
+      properties:
+        rateRecordGid:
+          type: string
+        rateRecordXid:
+          type: string
+        carrierGid:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        expiryDate:
+          type: string
+          format: date
+        transportationMode:
+          type: string
+        rateOfferingGid:
+          type: string
+        currency:
+          type: string
+          maxLength: 3
+
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string

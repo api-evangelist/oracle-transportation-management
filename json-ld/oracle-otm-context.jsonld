@@ -1,0 +1,91 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "otm": "https://docs.oracle.com/en/cloud/saas/transportation/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "ShipmentOrder": {
+      "@id": "schema:DeliveryEvent",
+      "@type": "@id"
+    },
+    "shipmentOrderGid": {
+      "@id": "schema:identifier"
+    },
+    "shipmentOrderXid": {
+      "@id": "schema:orderNumber"
+    },
+    "status": {
+      "@id": "schema:status"
+    },
+    "sourceLocationGid": {
+      "@id": "schema:originAddress"
+    },
+    "destLocationGid": {
+      "@id": "schema:destinationAddress"
+    },
+    "earlyPickupDate": {
+      "@id": "schema:expectedArrivalFrom",
+      "@type": "xsd:dateTime"
+    },
+    "lateDeliveryDate": {
+      "@id": "schema:expectedArrivalUntil",
+      "@type": "xsd:dateTime"
+    },
+    "transportationMode": {
+      "@id": "schema:deliveryMethod"
+    },
+    "totalWeight": {
+      "@id": "schema:weight",
+      "@type": "xsd:decimal"
+    },
+
+    "Carrier": {
+      "@id": "schema:Organization",
+      "@type": "@id"
+    },
+    "servprovGid": {
+      "@id": "schema:identifier"
+    },
+    "scacCode": {
+      "@id": "otm:scacCode"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+
+    "Location": {
+      "@id": "schema:Place",
+      "@type": "@id"
+    },
+    "locationGid": {
+      "@id": "schema:identifier"
+    },
+    "locationName": {
+      "@id": "schema:name"
+    },
+    "address1": {
+      "@id": "schema:streetAddress"
+    },
+    "city": {
+      "@id": "schema:addressLocality"
+    },
+    "province": {
+      "@id": "schema:addressRegion"
+    },
+    "postalCode": {
+      "@id": "schema:postalCode"
+    },
+    "country": {
+      "@id": "schema:addressCountry"
+    },
+    "latitude": {
+      "@id": "schema:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "schema:longitude",
+      "@type": "xsd:decimal"
+    }
+  }
+}
