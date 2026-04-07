@@ -24,19 +24,15 @@ security:
   - oauth2: []
 
 tags:
-  - name: ShipmentOrders
-    description: Shipment order management
   - name: Carriers
     description: Carrier master data
-  - name: Lanes
-    description: Lane and routing management
-  - name: Rates
-    description: Rate records and freight costs
-  - name: TransportationPlans
-    description: Transportation plan management
   - name: Locations
     description: Location master data
 
+  - name: Rates
+    description: Rate records and freight costs
+  - name: ShipmentOrders
+    description: Shipment order management
 paths:
   /shipment-orders:
     get:
