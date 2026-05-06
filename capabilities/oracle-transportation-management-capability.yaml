@@ -1,0 +1,451 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Transportation Management Business Object Resources REST API
+  description: Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment
+    orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global
+    Trade Management.
+  tags:
+  - Oracle
+  - Transportation
+  - Management
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: oracle-transportation-management
+    baseUri: https://otm.example.com/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+    description: Oracle Transportation Management Business Object Resources REST API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{ORACLE_TRANSPORTATION_MANAGEMENT_TOKEN}}'
+    resources:
+    - name: shipment-orders
+      path: /shipment-orders
+      operations:
+      - name: listshipmentorders
+        method: GET
+        description: List shipment orders
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Filter by order status
+        - name: startDate
+          in: query
+          type: string
+          description: Early pickup date filter (ISO 8601)
+        - name: endDate
+          in: query
+          type: string
+        - name: sourceLocationGid
+          in: query
+          type: string
+          description: Filter by origin location GID
+        - name: destLocationGid
+          in: query
+          type: string
+          description: Filter by destination location GID
+        - name: offset
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createshipmentorder
+        method: POST
+        description: Create a shipment order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: shipment-orders-gid
+      path: /shipment-orders/{gid}
+      operations:
+      - name: getshipmentorder
+        method: GET
+        description: Get a shipment order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateshipmentorder
+        method: PUT
+        description: Update a shipment order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteshipmentorder
+        method: DELETE
+        description: Delete a shipment order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: carriers
+      path: /carriers
+      operations:
+      - name: listcarriers
+        method: GET
+        description: List carriers
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+        - name: offset
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: carriers-gid
+      path: /carriers/{gid}
+      operations:
+      - name: getcarrier
+        method: GET
+        description: Get a carrier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: locations
+      path: /locations
+      operations:
+      - name: listlocations
+        method: GET
+        description: List locations
+        inputParameters:
+        - name: locationType
+          in: query
+          type: string
+        - name: country
+          in: query
+          type: string
+        - name: offset
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rates
+      path: /rates
+      operations:
+      - name: listrates
+        method: GET
+        description: List rate records
+        inputParameters:
+        - name: carrierGid
+          in: query
+          type: string
+        - name: effectiveDate
+          in: query
+          type: string
+        - name: offset
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: oracle-transportation-management-rest
+    description: REST adapter for Oracle Transportation Management Business Object Resources REST API.
+    resources:
+    - path: /shipment-orders
+      name: listshipmentorders
+      operations:
+      - method: GET
+        name: listshipmentorders
+        description: List shipment orders
+        call: oracle-transportation-management.listshipmentorders
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /shipment-orders
+      name: createshipmentorder
+      operations:
+      - method: POST
+        name: createshipmentorder
+        description: Create a shipment order
+        call: oracle-transportation-management.createshipmentorder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /shipment-orders/{gid}
+      name: getshipmentorder
+      operations:
+      - method: GET
+        name: getshipmentorder
+        description: Get a shipment order
+        call: oracle-transportation-management.getshipmentorder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /shipment-orders/{gid}
+      name: updateshipmentorder
+      operations:
+      - method: PUT
+        name: updateshipmentorder
+        description: Update a shipment order
+        call: oracle-transportation-management.updateshipmentorder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /shipment-orders/{gid}
+      name: deleteshipmentorder
+      operations:
+      - method: DELETE
+        name: deleteshipmentorder
+        description: Delete a shipment order
+        call: oracle-transportation-management.deleteshipmentorder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /carriers
+      name: listcarriers
+      operations:
+      - method: GET
+        name: listcarriers
+        description: List carriers
+        call: oracle-transportation-management.listcarriers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /carriers/{gid}
+      name: getcarrier
+      operations:
+      - method: GET
+        name: getcarrier
+        description: Get a carrier
+        call: oracle-transportation-management.getcarrier
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /locations
+      name: listlocations
+      operations:
+      - method: GET
+        name: listlocations
+        description: List locations
+        call: oracle-transportation-management.listlocations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rates
+      name: listrates
+      operations:
+      - method: GET
+        name: listrates
+        description: List rate records
+        call: oracle-transportation-management.listrates
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: oracle-transportation-management-mcp
+    transport: http
+    description: MCP adapter for Oracle Transportation Management Business Object Resources REST API for AI agent use.
+    tools:
+    - name: listshipmentorders
+      description: List shipment orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-transportation-management.listshipmentorders
+      with:
+        status: tools.status
+        startDate: tools.startDate
+        endDate: tools.endDate
+        sourceLocationGid: tools.sourceLocationGid
+        destLocationGid: tools.destLocationGid
+        offset: tools.offset
+        limit: tools.limit
+      inputParameters:
+      - name: status
+        type: string
+        description: Filter by order status
+      - name: startDate
+        type: string
+        description: Early pickup date filter (ISO 8601)
+      - name: endDate
+        type: string
+        description: endDate
+      - name: sourceLocationGid
+        type: string
+        description: Filter by origin location GID
+      - name: destLocationGid
+        type: string
+        description: Filter by destination location GID
+      - name: offset
+        type: integer
+        description: offset
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createshipmentorder
+      description: Create a shipment order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: oracle-transportation-management.createshipmentorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getshipmentorder
+      description: Get a shipment order
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-transportation-management.getshipmentorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateshipmentorder
+      description: Update a shipment order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: oracle-transportation-management.updateshipmentorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteshipmentorder
+      description: Delete a shipment order
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: oracle-transportation-management.deleteshipmentorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listcarriers
+      description: List carriers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-transportation-management.listcarriers
+      with:
+        status: tools.status
+        offset: tools.offset
+        limit: tools.limit
+      inputParameters:
+      - name: status
+        type: string
+        description: status
+      - name: offset
+        type: integer
+        description: offset
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcarrier
+      description: Get a carrier
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-transportation-management.getcarrier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listlocations
+      description: List locations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-transportation-management.listlocations
+      with:
+        locationType: tools.locationType
+        country: tools.country
+        offset: tools.offset
+        limit: tools.limit
+      inputParameters:
+      - name: locationType
+        type: string
+        description: locationType
+      - name: country
+        type: string
+        description: country
+      - name: offset
+        type: integer
+        description: offset
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listrates
+      description: List rate records
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-transportation-management.listrates
+      with:
+        carrierGid: tools.carrierGid
+        effectiveDate: tools.effectiveDate
+        offset: tools.offset
+        limit: tools.limit
+      inputParameters:
+      - name: carrierGid
+        type: string
+        description: carrierGid
+      - name: effectiveDate
+        type: string
+        description: effectiveDate
+      - name: offset
+        type: integer
+        description: offset
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    ORACLE_TRANSPORTATION_MANAGEMENT_TOKEN: ORACLE_TRANSPORTATION_MANAGEMENT_TOKEN
