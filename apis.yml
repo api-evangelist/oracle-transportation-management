@@ -71,15 +71,15 @@ common:
     url: https://support.oracle.com/portal/
   - type: Blog
     url: https://blogs.oracle.com/scm/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.oracle.com/legal/privacy/privacy-policy/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.oracle.com/legal/terms/
   - type: Developer Portal
     url: https://www.oracle.com/developer/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/oracle
-  - type: Status
+  - type: StatusPage
     url: https://ocistatus.oraclecloud.com/
   - type: OpenAPI
     url: openapi/oracle-otm-business-objects-openapi.yml
