@@ -1,0 +1,121 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Transportation Management Business Object Resources REST API — Carriers
+  description: 'Oracle Transportation Management Business Object Resources REST API — Carriers. 2 operations. Lead operation:
+    List carriers. Self-contained Naftiko capability covering one Oracle Transportation Management business surface.'
+  tags:
+  - Oracle Transportation Management
+  - Carriers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_TRANSPORTATION_MANAGEMENT_API_KEY: ORACLE_TRANSPORTATION_MANAGEMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oracle-otm-business-objects-carriers
+    baseUri: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+    description: Oracle Transportation Management Business Object Resources REST API — Carriers business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: carriers
+      path: /carriers
+      operations:
+      - name: listcarriers
+        method: GET
+        description: List carriers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+        - name: offset
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+    - name: carriers-gid
+      path: /carriers/{gid}
+      operations:
+      - name: getcarrier
+        method: GET
+        description: Get a carrier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_TRANSPORTATION_MANAGEMENT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: oracle-otm-business-objects-carriers-rest
+    port: 8080
+    description: REST adapter for Oracle Transportation Management Business Object Resources REST API — Carriers. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/carriers
+      name: carriers
+      description: REST surface for carriers.
+      operations:
+      - method: GET
+        name: listcarriers
+        description: List carriers
+        call: oracle-otm-business-objects-carriers.listcarriers
+        with:
+          status: rest.status
+          offset: rest.offset
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/carriers/{gid}
+      name: carriers-gid
+      description: REST surface for carriers-gid.
+      operations:
+      - method: GET
+        name: getcarrier
+        description: Get a carrier
+        call: oracle-otm-business-objects-carriers.getcarrier
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oracle-otm-business-objects-carriers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Transportation Management Business Object Resources REST API — Carriers. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-carriers
+      description: List carriers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-otm-business-objects-carriers.listcarriers
+      with:
+        status: tools.status
+        offset: tools.offset
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-carrier
+      description: Get a carrier
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-otm-business-objects-carriers.getcarrier
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,94 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Transportation Management Business Object Resources REST API — Rates
+  description: 'Oracle Transportation Management Business Object Resources REST API — Rates. 1 operations. Lead operation:
+    List rate records. Self-contained Naftiko capability covering one Oracle Transportation Management business surface.'
+  tags:
+  - Oracle Transportation Management
+  - Rates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_TRANSPORTATION_MANAGEMENT_API_KEY: ORACLE_TRANSPORTATION_MANAGEMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oracle-otm-business-objects-rates
+    baseUri: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+    description: Oracle Transportation Management Business Object Resources REST API — Rates business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: rates
+      path: /rates
+      operations:
+      - name: listrates
+        method: GET
+        description: List rate records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: carrierGid
+          in: query
+          type: string
+        - name: effectiveDate
+          in: query
+          type: string
+        - name: offset
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_TRANSPORTATION_MANAGEMENT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: oracle-otm-business-objects-rates-rest
+    port: 8080
+    description: REST adapter for Oracle Transportation Management Business Object Resources REST API — Rates. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/rates
+      name: rates
+      description: REST surface for rates.
+      operations:
+      - method: GET
+        name: listrates
+        description: List rate records
+        call: oracle-otm-business-objects-rates.listrates
+        with:
+          carrierGid: rest.carrierGid
+          effectiveDate: rest.effectiveDate
+          offset: rest.offset
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oracle-otm-business-objects-rates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Transportation Management Business Object Resources REST API — Rates. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-rate-records
+      description: List rate records
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oracle-otm-business-objects-rates.listrates
+      with:
+        carrierGid: tools.carrierGid
+        effectiveDate: tools.effectiveDate
+        offset: tools.offset
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
