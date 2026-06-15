@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Transportation Management Business Object Resources REST API",
+    "version": "26b.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.oracle.com/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ShipmentOrders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List shipment orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/shipment-orders",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by order status"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Early pickup date filter (ISO 8601)"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceLocationGid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by origin location GID"
+              },
+              {
+                "name": "destLocationGid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by destination location GID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns shipment orders (orders to move) with status, routing, and carrier assignments."
+        },
+        {
+          "info": {
+            "name": "Create a shipment order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/shipment-orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new shipment order (order to move) in OTM."
+        },
+        {
+          "info": {
+            "name": "Get a shipment order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/shipment-orders/:gid",
+            "params": [
+              {
+                "name": "gid",
+                "value": "",
+                "type": "path",
+                "description": "OTM Global Identifier (domainName.xid format)"
+              }
+            ]
+          },
+          "docs": "Returns full shipment order details including lines, references, and routing."
+        },
+        {
+          "info": {
+            "name": "Update a shipment order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/shipment-orders/:gid",
+            "params": [
+              {
+                "name": "gid",
+                "value": "",
+                "type": "path",
+                "description": "OTM Global Identifier (domainName.xid format)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates mutable fields on a shipment order."
+        },
+        {
+          "info": {
+            "name": "Delete a shipment order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/shipment-orders/:gid",
+            "params": [
+              {
+                "name": "gid",
+                "value": "",
+                "type": "path",
+                "description": "OTM Global Identifier (domainName.xid format)"
+              }
+            ]
+          },
+          "docs": "Deletes a shipment order in Draft status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Carriers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/carriers",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns carrier master data including SCAC codes and service levels."
+        },
+        {
+          "info": {
+            "name": "Get a carrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/carriers/:gid",
+            "params": [
+              {
+                "name": "gid",
+                "value": "",
+                "type": "path",
+                "description": "OTM Global Identifier (domainName.xid format)"
+              }
+            ]
+          },
+          "docs": "Returns carrier details including service offerings and contact information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/locations",
+            "params": [
+              {
+                "name": "locationType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns location master data including addresses and coordinates."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List rate records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/rates",
+            "params": [
+              {
+                "name": "carrierGid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "effectiveDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns freight rate records applicable to lanes and carriers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
