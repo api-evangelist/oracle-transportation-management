@@ -71,7 +71,7 @@ common:
     url: https://www.oracle.com/legal/privacy/privacy-policy/
   - type: TermsOfService
     url: https://www.oracle.com/legal/terms/
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://www.oracle.com/developer/
   - type: GitHubOrganization
     url: https://github.com/oracle
@@ -79,9 +79,9 @@ common:
     url: https://ocistatus.oraclecloud.com/
   - type: OpenAPI
     url: openapi/oracle-otm-business-objects-openapi.yml
-  - type: JSON Schema
+  - type: JSONSchema
     url: json-schema/oracle-otm-shipment-order-schema.json
-  - type: JSON-LD Context
+  - type: JSONLDContext
     url: json-ld/oracle-otm-context.jsonld
 maintainers:
   - FN: Kin Lane
