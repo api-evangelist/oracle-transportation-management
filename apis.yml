@@ -57,6 +57,10 @@ apis:
       - type: Documentation
         url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmro/index.html
 common:
+  - type: DomainSecurity
+    url: security/oracle-transportation-management-domain-security.yml
+  - type: Authentication
+    url: authentication/oracle-transportation-management-authentication.yml
   - type: OAuthScopes
     url: scopes/oracle-transportation-management-scopes.yml
   - type: Portal
