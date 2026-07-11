@@ -57,6 +57,8 @@ apis:
       - type: Documentation
         url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmro/index.html
 common:
+  - type: OAuthScopes
+    url: scopes/oracle-transportation-management-scopes.yml
   - type: Portal
     url: https://docs.oracle.com/en/cloud/saas/transport-management/
   - type: Documentation

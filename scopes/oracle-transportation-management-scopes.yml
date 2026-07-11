@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/oracle-otm-business-objects-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/oracle-otm-business-objects-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://login.oracle.com/oauth2/v1/token
+scopes:
+- scope: otm.read
+  description: Read OTM data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/oracle-otm-business-objects-openapi.yml
+- scope: otm.write
+  description: Write OTM data
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/oracle-otm-business-objects-openapi.yml
