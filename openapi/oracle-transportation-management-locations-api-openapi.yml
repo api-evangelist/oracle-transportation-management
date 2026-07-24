@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Oracle Transportation Management Business Object Resources REST Carriers Locations API
+  description: Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.
+  version: 26b.0.0
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms/
+servers:
+- url: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+  description: OTM REST API endpoint
+  variables:
+    host:
+      default: otm.example.com
+security:
+- oauth2: []
+tags:
+- name: Locations
+  description: Location master data
+paths:
+  /locations:
+    get:
+      operationId: listLocations
+      summary: List locations
+      description: Returns location master data including addresses and coordinates.
+      tags:
+      - Locations
+      parameters:
+      - name: locationType
+        in: query
+        schema:
+          type: string
+      - name: country
+        in: query
+        schema:
+          type: string
+          maxLength: 3
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Location list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Location'
+                  totalCount:
+                    type: integer
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        locationGid:
+          type: string
+        locationXid:
+          type: string
+        locationName:
+          type: string
+        locationType:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+          maxLength: 3
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.oracle.com/oauth2/v1/token
+          scopes:
+            otm.read: Read OTM data
+            otm.write: Write OTM data

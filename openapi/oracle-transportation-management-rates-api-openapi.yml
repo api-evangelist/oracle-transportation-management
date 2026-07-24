@@ -1,0 +1,97 @@
+openapi: 3.1.0
+info:
+  title: Oracle Transportation Management Business Object Resources REST Carriers Rates API
+  description: Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.
+  version: 26b.0.0
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms/
+servers:
+- url: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+  description: OTM REST API endpoint
+  variables:
+    host:
+      default: otm.example.com
+security:
+- oauth2: []
+tags:
+- name: Rates
+  description: Rate records and freight costs
+paths:
+  /rates:
+    get:
+      operationId: listRates
+      summary: List rate records
+      description: Returns freight rate records applicable to lanes and carriers.
+      tags:
+      - Rates
+      parameters:
+      - name: carrierGid
+        in: query
+        schema:
+          type: string
+      - name: effectiveDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Rate list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Rate'
+                  totalCount:
+                    type: integer
+components:
+  schemas:
+    Rate:
+      type: object
+      properties:
+        rateRecordGid:
+          type: string
+        rateRecordXid:
+          type: string
+        carrierGid:
+          type: string
+        effectiveDate:
+          type: string
+          format: date
+        expiryDate:
+          type: string
+          format: date
+        transportationMode:
+          type: string
+        rateOfferingGid:
+          type: string
+        currency:
+          type: string
+          maxLength: 3
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.oracle.com/oauth2/v1/token
+          scopes:
+            otm.read: Read OTM data
+            otm.write: Write OTM data

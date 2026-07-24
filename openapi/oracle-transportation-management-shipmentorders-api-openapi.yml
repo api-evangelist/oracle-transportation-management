@@ -1,0 +1,402 @@
+openapi: 3.1.0
+info:
+  title: Oracle Transportation Management Business Object Resources REST Carriers ShipmentOrders API
+  description: Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.
+  version: 26b.0.0
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms/
+servers:
+- url: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+  description: OTM REST API endpoint
+  variables:
+    host:
+      default: otm.example.com
+security:
+- oauth2: []
+tags:
+- name: ShipmentOrders
+  description: Shipment order management
+paths:
+  /shipment-orders:
+    get:
+      operationId: listShipmentOrders
+      summary: List shipment orders
+      description: Returns shipment orders (orders to move) with status, routing, and carrier assignments.
+      tags:
+      - ShipmentOrders
+      parameters:
+      - name: status
+        in: query
+        description: Filter by order status
+        schema:
+          type: string
+          enum:
+          - I
+          - OB
+          - PL
+          - DP
+          - IT
+          - DL
+          - CL
+      - name: startDate
+        in: query
+        description: Early pickup date filter (ISO 8601)
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: sourceLocationGid
+        in: query
+        description: Filter by origin location GID
+        schema:
+          type: string
+      - name: destLocationGid
+        in: query
+        description: Filter by destination location GID
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 100
+          maximum: 1000
+      responses:
+        '200':
+          description: Shipment order list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shipmentOrders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ShipmentOrder'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createShipmentOrder
+      summary: Create a shipment order
+      description: Creates a new shipment order (order to move) in OTM.
+      tags:
+      - ShipmentOrders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentOrderCreate'
+      responses:
+        '201':
+          description: Shipment order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentOrder'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /shipment-orders/{gid}:
+    get:
+      operationId: getShipmentOrder
+      summary: Get a shipment order
+      description: Returns full shipment order details including lines, references, and routing.
+      tags:
+      - ShipmentOrders
+      parameters:
+      - $ref: '#/components/parameters/GidParam'
+      responses:
+        '200':
+          description: Shipment order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentOrderDetail'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateShipmentOrder
+      summary: Update a shipment order
+      description: Updates mutable fields on a shipment order.
+      tags:
+      - ShipmentOrders
+      parameters:
+      - $ref: '#/components/parameters/GidParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentOrderUpdate'
+      responses:
+        '200':
+          description: Order updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentOrder'
+    delete:
+      operationId: deleteShipmentOrder
+      summary: Delete a shipment order
+      description: Deletes a shipment order in Draft status.
+      tags:
+      - ShipmentOrders
+      parameters:
+      - $ref: '#/components/parameters/GidParam'
+      responses:
+        '204':
+          description: Deleted
+components:
+  schemas:
+    ShipmentOrderLine:
+      type: object
+      properties:
+        lineNumber:
+          type: integer
+        itemGid:
+          type: string
+        itemDescription:
+          type: string
+        quantity:
+          type: number
+          format: double
+        quantityUom:
+          type: string
+        weight:
+          type: number
+          format: double
+        weightUom:
+          type: string
+        volume:
+          type: number
+          format: double
+        volumeUom:
+          type: string
+        packageType:
+          type: string
+    ShipmentOrderCreate:
+      type: object
+      required:
+      - shipmentOrderXid
+      - sourceLocationGid
+      - destLocationGid
+      - earlyPickupDate
+      - lateDeliveryDate
+      properties:
+        shipmentOrderXid:
+          type: string
+        sourceLocationGid:
+          type: string
+        destLocationGid:
+          type: string
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+        transportationMode:
+          type: string
+          enum:
+          - LTL
+          - TL
+          - OCEAN
+          - AIR
+          - RAIL
+          - PARCEL
+          - INTERMODAL
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentOrderLineCreate'
+    ShipmentOrder:
+      type: object
+      description: An OTM shipment order (order to move)
+      properties:
+        shipmentOrderGid:
+          type: string
+          description: Global identifier (domain.xid format)
+        shipmentOrderXid:
+          type: string
+          description: User-defined order ID
+        status:
+          type: string
+          enum:
+          - I
+          - OB
+          - PL
+          - DP
+          - IT
+          - DL
+          - CL
+          description: I=Initial, OB=Open-Booked, PL=Planned, DP=Dispatched, IT=InTransit, DL=Delivered, CL=Closed
+        sourceLocationGid:
+          type: string
+          description: Origin location GID
+        destLocationGid:
+          type: string
+          description: Destination location GID
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+        transportationMode:
+          type: string
+          enum:
+          - LTL
+          - TL
+          - OCEAN
+          - AIR
+          - RAIL
+          - PARCEL
+          - INTERMODAL
+        totalWeight:
+          type: number
+          format: double
+        totalWeightUom:
+          type: string
+          enum:
+          - LB
+          - KG
+          - T
+          - MT
+        totalVolume:
+          type: number
+          format: double
+        totalVolumeUom:
+          type: string
+        insertDate:
+          type: string
+          format: date-time
+        lastUpdateDate:
+          type: string
+          format: date-time
+    ShipmentOrderDetail:
+      allOf:
+      - $ref: '#/components/schemas/ShipmentOrder'
+      - type: object
+        properties:
+          lines:
+            type: array
+            items:
+              $ref: '#/components/schemas/ShipmentOrderLine'
+          references:
+            type: array
+            items:
+              type: object
+              properties:
+                refType:
+                  type: string
+                refValue:
+                  type: string
+    ShipmentOrderLineCreate:
+      type: object
+      required:
+      - lineNumber
+      - quantity
+      - quantityUom
+      properties:
+        lineNumber:
+          type: integer
+        itemGid:
+          type: string
+        itemDescription:
+          type: string
+        quantity:
+          type: number
+          format: double
+        quantityUom:
+          type: string
+        weight:
+          type: number
+          format: double
+        weightUom:
+          type: string
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+    ShipmentOrderUpdate:
+      type: object
+      properties:
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    GidParam:
+      name: gid
+      in: path
+      required: true
+      description: OTM Global Identifier (domainName.xid format)
+      schema:
+        type: string
+        pattern: ^[A-Z0-9_]+\.[A-Z0-9_-]+$
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.oracle.com/oauth2/v1/token
+          scopes:
+            otm.read: Read OTM data
+            otm.write: Write OTM data

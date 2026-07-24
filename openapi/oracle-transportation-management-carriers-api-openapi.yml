@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: Oracle Transportation Management Business Object Resources REST Carriers API
+  description: Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.
+  version: 26b.0.0
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+  license:
+    name: Oracle Technology Network License
+    url: https://www.oracle.com/legal/terms/
+servers:
+- url: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+  description: OTM REST API endpoint
+  variables:
+    host:
+      default: otm.example.com
+security:
+- oauth2: []
+tags:
+- name: Carriers
+  description: Carrier master data
+paths:
+  /carriers:
+    get:
+      operationId: listCarriers
+      summary: List carriers
+      description: Returns carrier master data including SCAC codes and service levels.
+      tags:
+      - Carriers
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - A
+          - I
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Carrier list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  carriers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Carrier'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /carriers/{gid}:
+    get:
+      operationId: getCarrier
+      summary: Get a carrier
+      description: Returns carrier details including service offerings and contact information.
+      tags:
+      - Carriers
+      parameters:
+      - $ref: '#/components/parameters/GidParam'
+      responses:
+        '200':
+          description: Carrier details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carrier'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Carrier:
+      type: object
+      properties:
+        servprovGid:
+          type: string
+          description: Service provider GID
+        servprovXid:
+          type: string
+          description: Carrier identifier (SCAC or internal)
+        name:
+          type: string
+        scacCode:
+          type: string
+          maxLength: 4
+          description: Standard Carrier Alpha Code
+        status:
+          type: string
+          enum:
+          - A
+          - I
+        transportationModes:
+          type: array
+          items:
+            type: string
+        contactName:
+          type: string
+        contactPhone:
+          type: string
+        contactEmail:
+          type: string
+          format: email
+        insertDate:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    GidParam:
+      name: gid
+      in: path
+      required: true
+      description: OTM Global Identifier (domainName.xid format)
+      schema:
+        type: string
+        pattern: ^[A-Z0-9_]+\.[A-Z0-9_-]+$
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.oracle.com/oauth2/v1/token
+          scopes:
+            otm.read: Read OTM data
+            otm.write: Write OTM data
