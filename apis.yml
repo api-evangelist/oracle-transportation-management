@@ -6,9 +6,22 @@ description: >-
   transportation plans, and logistics data, plus table-centric data export for integration with reporting, analytics,
   and data warehouse systems.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/oracle-transportation-management.png
 url: https://raw.githubusercontent.com/api-evangelist/oracle-transportation-management/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -22,40 +35,76 @@ tags:
   - Global Trade
   - Oracle
 apis:
-  - name: Oracle Transportation Management Business Object Resources REST API
-    description: >-
-      Oracle Transportation Management Business Object Resources REST API enables programmatic access to in-system data
-      and integrations with shipment orders, carriers, lanes, rates, and transportation plans in Oracle Fusion Cloud
-      Transportation and Global Trade Management.
-    image: https://www.oracle.com/a/ocom/img/social-og-oracle-cloud.jpg
-    humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
-    baseURL: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
-    tags:
-      - Freight
-      - Logistics
-      - REST
-      - Transportation
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
-      - type: Reference
-        url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
-      - type: OpenAPI
-        url: openapi/oracle-otm-business-objects-openapi.yml
-  - name: Oracle Transportation Management Data Export REST API
-    description: >-
-      Oracle Transportation Management Data Export REST API facilitates table-centric data extraction and integration
-      with external systems for reporting, analytics, and data warehouse use cases.
-    image: https://www.oracle.com/a/ocom/img/social-og-oracle-cloud.jpg
-    humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmro/index.html
-    tags:
-      - Data Export
-      - Logistics
-      - REST
-      - Transportation
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmro/index.html
+- name: Oracle Transportation Management Data Export REST API
+  description: >-
+    Oracle Transportation Management Data Export REST API facilitates table-centric data extraction and
+    integration with external systems for reporting, analytics, and data warehouse use cases.
+  image: https://www.oracle.com/a/ocom/img/social-og-oracle-cloud.jpg
+  humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmro/index.html
+  tags:
+  - Data Export
+  - Logistics
+  - REST
+  - Transportation
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmro/index.html
+- aid: oracle-transportation-management:oracle-transportation-management-carriers-api
+  name: Oracle Transportation Management Carriers API
+  description: Carrier master data
+  humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  baseURL: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+  tags:
+  - Carriers
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-transportation-management-carriers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  - type: Reference
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
+- aid: oracle-transportation-management:oracle-transportation-management-locations-api
+  name: Oracle Transportation Management Locations API
+  description: Location master data
+  humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  baseURL: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-transportation-management-locations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  - type: Reference
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
+- aid: oracle-transportation-management:oracle-transportation-management-rates-api
+  name: Oracle Transportation Management Rates API
+  description: Rate records and freight costs
+  humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  baseURL: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+  tags:
+  - Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-transportation-management-rates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  - type: Reference
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
+- aid: oracle-transportation-management:oracle-transportation-management-shipmentorders-api
+  name: Oracle Transportation Management ShipmentOrders API
+  description: Shipment order management
+  humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  baseURL: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
+  tags:
+  - ShipmentOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-transportation-management-shipmentorders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  - type: Reference
+    url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
 common:
   - type: AgenticAccess
     url: agentic-access/oracle-transportation-management-agentic-access.yml
