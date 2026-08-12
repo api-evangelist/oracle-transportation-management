@@ -135,7 +135,7 @@ common:
   - type: StatusPage
     url: https://ocistatus.oraclecloud.com/
   - type: OpenAPI
-    url: openapi/oracle-otm-business-objects-openapi.yml
+    url: openapi/_original/oracle-otm-business-objects-openapi.yml
   - type: JSONSchema
     url: json-schema/oracle-otm-shipment-order-schema.json
   - type: JSONLDContext
