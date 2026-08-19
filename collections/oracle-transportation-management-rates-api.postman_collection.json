@@ -1,0 +1,194 @@
+{
+  "item": [
+    {
+      "id": "4dc08a38-e02f-47f3-8926-27aa6c99203f",
+      "name": "Rates",
+      "description": {
+        "content": "Rate records and freight costs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96fe1e0e-77f1-4142-af8c-b1a277e6b122",
+          "name": "List rate records",
+          "request": {
+            "name": "List rate records",
+            "description": {
+              "content": "Returns freight rate records applicable to lanes and carriers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrierGid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "effectiveDate",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a71091a5-8008-4e89-b544-e4ce2d32db71",
+              "name": "Rate list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrierGid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rates\": [\n    {\n      \"rateRecordGid\": \"string\",\n      \"rateRecordXid\": \"string\",\n      \"carrierGid\": \"string\",\n      \"effectiveDate\": \"1946-12-31\",\n      \"expiryDate\": \"1976-07-22\",\n      \"transportationMode\": \"string\",\n      \"rateOfferingGid\": \"string\",\n      \"currency\": \"str\"\n    },\n    {\n      \"rateRecordGid\": \"string\",\n      \"rateRecordXid\": \"string\",\n      \"carrierGid\": \"string\",\n      \"effectiveDate\": \"2005-02-17\",\n      \"expiryDate\": \"1959-07-11\",\n      \"transportationMode\": \"string\",\n      \"rateOfferingGid\": \"string\",\n      \"currency\": \"str\"\n    }\n  ],\n  \"totalCount\": 3917\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "otm.example.com",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "otm.read otm.write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.oracle.com/oauth2/v1/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2b8b4785-bb3d-45b8-8dc4-902285ea65f4",
+    "name": "Oracle Transportation Management Business Object Resources REST Carriers Rates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.\n\nContact Support:\n Name: Oracle Support",
+      "type": "text/plain"
+    }
+  }
+}

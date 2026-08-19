@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Transportation Management Business Object Resources REST Carriers API",
+    "version": "26b.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.oracle.com/oauth2/v1/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Carriers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/carriers",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns carrier master data including SCAC codes and service levels."
+        },
+        {
+          "info": {
+            "name": "Get a carrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1/carriers/:gid",
+            "params": [
+              {
+                "name": "gid",
+                "value": "",
+                "type": "path",
+                "description": "OTM Global Identifier (domainName.xid format)"
+              }
+            ]
+          },
+          "docs": "Returns carrier details including service offerings and contact information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

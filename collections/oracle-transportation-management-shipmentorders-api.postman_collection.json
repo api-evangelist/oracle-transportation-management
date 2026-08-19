@@ -1,0 +1,901 @@
+{
+  "item": [
+    {
+      "id": "b03461d4-cd26-4e2a-9abf-d0fcd9df6567",
+      "name": "ShipmentOrders",
+      "description": {
+        "content": "Shipment order management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a375aac-cb42-4254-9eb5-b8e84dd5753b",
+          "name": "List shipment orders",
+          "request": {
+            "name": "List shipment orders",
+            "description": {
+              "content": "Returns shipment orders (orders to move) with status, routing, and carrier assignments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment-orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by order status"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "Early pickup date filter (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceLocationGid",
+                  "value": "<string>",
+                  "description": "Filter by origin location GID"
+                },
+                {
+                  "disabled": false,
+                  "key": "destLocationGid",
+                  "value": "<string>",
+                  "description": "Filter by destination location GID"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                }
+              ],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b20d45fd-67cf-4fe9-827a-4b50e488e38c",
+              "name": "Shipment order list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sourceLocationGid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destLocationGid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipmentOrders\": [\n    {\n      \"shipmentOrderGid\": \"string\",\n      \"shipmentOrderXid\": \"string\",\n      \"status\": \"DP\",\n      \"sourceLocationGid\": \"string\",\n      \"destLocationGid\": \"string\",\n      \"earlyPickupDate\": \"1958-04-04T16:06:52.650Z\",\n      \"latePickupDate\": \"2024-05-18T17:26:16.730Z\",\n      \"earlyDeliveryDate\": \"2007-08-12T23:01:57.552Z\",\n      \"lateDeliveryDate\": \"2006-05-11T12:40:59.149Z\",\n      \"transportationMode\": \"AIR\",\n      \"totalWeight\": 4241.023095941916,\n      \"totalWeightUom\": \"KG\",\n      \"totalVolume\": 6127.604284998211,\n      \"totalVolumeUom\": \"string\",\n      \"insertDate\": \"1954-11-25T21:50:34.246Z\",\n      \"lastUpdateDate\": \"2021-09-17T03:07:11.964Z\"\n    },\n    {\n      \"shipmentOrderGid\": \"string\",\n      \"shipmentOrderXid\": \"string\",\n      \"status\": \"CL\",\n      \"sourceLocationGid\": \"string\",\n      \"destLocationGid\": \"string\",\n      \"earlyPickupDate\": \"1958-10-25T02:39:03.558Z\",\n      \"latePickupDate\": \"1990-06-10T02:18:19.223Z\",\n      \"earlyDeliveryDate\": \"1950-04-24T20:33:21.354Z\",\n      \"lateDeliveryDate\": \"2006-03-01T15:56:53.435Z\",\n      \"transportationMode\": \"LTL\",\n      \"totalWeight\": 4912.83618904303,\n      \"totalWeightUom\": \"KG\",\n      \"totalVolume\": 5321.51540888103,\n      \"totalVolumeUom\": \"string\",\n      \"insertDate\": \"1946-12-24T19:21:40.659Z\",\n      \"lastUpdateDate\": \"2014-12-07T19:39:55.523Z\"\n    }\n  ],\n  \"totalCount\": 1498\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "316c3089-69b1-446f-82dd-4676d3108624",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sourceLocationGid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destLocationGid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da02eda5-81ad-422c-9d3f-9b3bc5b11ea0",
+          "name": "Create a shipment order",
+          "request": {
+            "name": "Create a shipment order",
+            "description": {
+              "content": "Creates a new shipment order (order to move) in OTM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment-orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipmentOrderXid\": \"<string>\",\n  \"sourceLocationGid\": \"<string>\",\n  \"destLocationGid\": \"<string>\",\n  \"earlyPickupDate\": \"<dateTime>\",\n  \"lateDeliveryDate\": \"<dateTime>\",\n  \"latePickupDate\": \"<dateTime>\",\n  \"earlyDeliveryDate\": \"<dateTime>\",\n  \"transportationMode\": \"<string>\",\n  \"lines\": [\n    {\n      \"lineNumber\": \"<integer>\",\n      \"quantity\": \"<double>\",\n      \"quantityUom\": \"<string>\",\n      \"itemGid\": \"<string>\",\n      \"itemDescription\": \"<string>\",\n      \"weight\": \"<double>\",\n      \"weightUom\": \"<string>\"\n    },\n    {\n      \"lineNumber\": \"<integer>\",\n      \"quantity\": \"<double>\",\n      \"quantityUom\": \"<string>\",\n      \"itemGid\": \"<string>\",\n      \"itemDescription\": \"<string>\",\n      \"weight\": \"<double>\",\n      \"weightUom\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da3db53b-da1d-433f-9d84-2eb6860f708c",
+              "name": "Shipment order created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipmentOrderXid\": \"<string>\",\n  \"sourceLocationGid\": \"<string>\",\n  \"destLocationGid\": \"<string>\",\n  \"earlyPickupDate\": \"<dateTime>\",\n  \"lateDeliveryDate\": \"<dateTime>\",\n  \"latePickupDate\": \"<dateTime>\",\n  \"earlyDeliveryDate\": \"<dateTime>\",\n  \"transportationMode\": \"<string>\",\n  \"lines\": [\n    {\n      \"lineNumber\": 7200,\n      \"quantity\": 5758.484310388825,\n      \"quantityUom\": \"string\",\n      \"itemGid\": \"string\",\n      \"itemDescription\": \"string\",\n      \"weight\": 8760.728405065089,\n      \"weightUom\": \"string\"\n    },\n    {\n      \"lineNumber\": 6844,\n      \"quantity\": 538.3146056739863,\n      \"quantityUom\": \"string\",\n      \"itemGid\": \"string\",\n      \"itemDescription\": \"string\",\n      \"weight\": 7902.732498842567,\n      \"weightUom\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipmentOrderGid\": \"string\",\n  \"shipmentOrderXid\": \"string\",\n  \"status\": \"I\",\n  \"sourceLocationGid\": \"string\",\n  \"destLocationGid\": \"string\",\n  \"earlyPickupDate\": \"1966-07-13T23:30:52.526Z\",\n  \"latePickupDate\": \"1960-03-28T04:57:27.762Z\",\n  \"earlyDeliveryDate\": \"1967-07-18T22:16:26.962Z\",\n  \"lateDeliveryDate\": \"2003-01-24T12:26:36.118Z\",\n  \"transportationMode\": \"OCEAN\",\n  \"totalWeight\": 745.5672963807048,\n  \"totalWeightUom\": \"LB\",\n  \"totalVolume\": 9416.630340474278,\n  \"totalVolumeUom\": \"string\",\n  \"insertDate\": \"1986-09-13T18:42:58.293Z\",\n  \"lastUpdateDate\": \"1950-10-25T12:28:33.142Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72ac6776-52e2-4e3f-b1e6-600d3fe46c9f",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment-orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipmentOrderXid\": \"<string>\",\n  \"sourceLocationGid\": \"<string>\",\n  \"destLocationGid\": \"<string>\",\n  \"earlyPickupDate\": \"<dateTime>\",\n  \"lateDeliveryDate\": \"<dateTime>\",\n  \"latePickupDate\": \"<dateTime>\",\n  \"earlyDeliveryDate\": \"<dateTime>\",\n  \"transportationMode\": \"<string>\",\n  \"lines\": [\n    {\n      \"lineNumber\": 7200,\n      \"quantity\": 5758.484310388825,\n      \"quantityUom\": \"string\",\n      \"itemGid\": \"string\",\n      \"itemDescription\": \"string\",\n      \"weight\": 8760.728405065089,\n      \"weightUom\": \"string\"\n    },\n    {\n      \"lineNumber\": 6844,\n      \"quantity\": 538.3146056739863,\n      \"quantityUom\": \"string\",\n      \"itemGid\": \"string\",\n      \"itemDescription\": \"string\",\n      \"weight\": 7902.732498842567,\n      \"weightUom\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c9207ef-ed72-45e4-a036-c3b1cee6745e",
+          "name": "Get a shipment order",
+          "request": {
+            "name": "Get a shipment order",
+            "description": {
+              "content": "Returns full shipment order details including lines, references, and routing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment-orders",
+                ":gid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "gid",
+                  "description": "(Required) OTM Global Identifier (domainName.xid format)"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88c46ef3-da32-4e30-b2a6-d427e8883fea",
+              "name": "Shipment order details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment-orders",
+                    ":gid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gid",
+                      "description": "(Required) OTM Global Identifier (domainName.xid format)"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipmentOrderGid\": \"string\",\n  \"shipmentOrderXid\": \"string\",\n  \"status\": \"DL\",\n  \"sourceLocationGid\": \"string\",\n  \"destLocationGid\": \"string\",\n  \"earlyPickupDate\": \"1952-10-07T04:36:34.991Z\",\n  \"latePickupDate\": \"1963-05-21T20:25:41.526Z\",\n  \"earlyDeliveryDate\": \"1984-12-23T08:36:24.091Z\",\n  \"lateDeliveryDate\": \"1965-05-11T14:01:39.868Z\",\n  \"transportationMode\": \"OCEAN\",\n  \"totalWeight\": 4944.074430885422,\n  \"totalWeightUom\": \"T\",\n  \"totalVolume\": 5134.907116494402,\n  \"totalVolumeUom\": \"string\",\n  \"insertDate\": \"2005-03-27T20:31:22.611Z\",\n  \"lastUpdateDate\": \"1947-07-27T03:40:38.947Z\",\n  \"lines\": [\n    {\n      \"lineNumber\": 6040,\n      \"itemGid\": \"string\",\n      \"itemDescription\": \"string\",\n      \"quantity\": 1284.5839314403395,\n      \"quantityUom\": \"string\",\n      \"weight\": 2228.5438007481416,\n      \"weightUom\": \"string\",\n      \"volume\": 3223.308931817763,\n      \"volumeUom\": \"string\",\n      \"packageType\": \"string\"\n    },\n    {\n      \"lineNumber\": 5261,\n      \"itemGid\": \"string\",\n      \"itemDescription\": \"string\",\n      \"quantity\": 9898.158876862326,\n      \"quantityUom\": \"string\",\n      \"weight\": 4310.735755910181,\n      \"weightUom\": \"string\",\n      \"volume\": 7574.7953028779975,\n      \"volumeUom\": \"string\",\n      \"packageType\": \"string\"\n    }\n  ],\n  \"references\": [\n    {\n      \"refType\": \"string\",\n      \"refValue\": \"string\"\n    },\n    {\n      \"refType\": \"string\",\n      \"refValue\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "975d6ddf-469f-4adf-9bdf-c26aea885712",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment-orders",
+                    ":gid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gid",
+                      "description": "(Required) OTM Global Identifier (domainName.xid format)"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42e73027-919b-4e68-86b8-68911a970754",
+          "name": "Update a shipment order",
+          "request": {
+            "name": "Update a shipment order",
+            "description": {
+              "content": "Updates mutable fields on a shipment order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment-orders",
+                ":gid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "gid",
+                  "description": "(Required) OTM Global Identifier (domainName.xid format)"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"earlyPickupDate\": \"<dateTime>\",\n  \"latePickupDate\": \"<dateTime>\",\n  \"earlyDeliveryDate\": \"<dateTime>\",\n  \"lateDeliveryDate\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5183235f-239f-4508-936b-9b33d5f9e78a",
+              "name": "Order updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment-orders",
+                    ":gid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gid",
+                      "description": "(Required) OTM Global Identifier (domainName.xid format)"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"earlyPickupDate\": \"<dateTime>\",\n  \"latePickupDate\": \"<dateTime>\",\n  \"earlyDeliveryDate\": \"<dateTime>\",\n  \"lateDeliveryDate\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipmentOrderGid\": \"string\",\n  \"shipmentOrderXid\": \"string\",\n  \"status\": \"I\",\n  \"sourceLocationGid\": \"string\",\n  \"destLocationGid\": \"string\",\n  \"earlyPickupDate\": \"1966-07-13T23:30:52.526Z\",\n  \"latePickupDate\": \"1960-03-28T04:57:27.762Z\",\n  \"earlyDeliveryDate\": \"1967-07-18T22:16:26.962Z\",\n  \"lateDeliveryDate\": \"2003-01-24T12:26:36.118Z\",\n  \"transportationMode\": \"OCEAN\",\n  \"totalWeight\": 745.5672963807048,\n  \"totalWeightUom\": \"LB\",\n  \"totalVolume\": 9416.630340474278,\n  \"totalVolumeUom\": \"string\",\n  \"insertDate\": \"1986-09-13T18:42:58.293Z\",\n  \"lastUpdateDate\": \"1950-10-25T12:28:33.142Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0d5c331-8978-40a7-ad1f-1491fffc9354",
+          "name": "Delete a shipment order",
+          "request": {
+            "name": "Delete a shipment order",
+            "description": {
+              "content": "Deletes a shipment order in Draft status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipment-orders",
+                ":gid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "gid",
+                  "description": "(Required) OTM Global Identifier (domainName.xid format)"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e13729ac-127b-4b63-a31c-994276b56bfc",
+              "name": "Deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipment-orders",
+                    ":gid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "gid",
+                      "description": "(Required) OTM Global Identifier (domainName.xid format)"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "otm.example.com",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "otm.read otm.write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.oracle.com/oauth2/v1/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0f26a9b9-5fd5-40f9-86ea-2b4514a4171c",
+    "name": "Oracle Transportation Management Business Object Resources REST Carriers ShipmentOrders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.\n\nContact Support:\n Name: Oracle Support",
+      "type": "text/plain"
+    }
+  }
+}
