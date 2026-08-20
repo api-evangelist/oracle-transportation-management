@@ -97,6 +97,8 @@ apis:
   humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
   baseURL: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
   tags:
+  - Shipment Orders
+  tags_raw:
   - ShipmentOrders
   properties:
   - type: OpenAPI
