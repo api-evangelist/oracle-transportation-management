@@ -118,6 +118,9 @@ apis:
   - type: Reference
     url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
 common:
+- type: CapabilityMap
+  url: capabilities/oracle-transportation-management-capability-edges.yml
+  name: Oracle Transportation Management Business Capability Map
 - type: ParentCompany
   url: https://apis.io/providers/oracle/
   name: Oracle
