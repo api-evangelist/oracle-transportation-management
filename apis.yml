@@ -47,7 +47,8 @@ tags:
 - Oracle
 apis:
 - name: Oracle Transportation Management Data Export REST API
-  description: Oracle Transportation Management Data Export REST API facilitates table-centric data extraction and
+  description: >-
+    Oracle Transportation Management Data Export REST API facilitates table-centric data extraction and
     integration with external systems for reporting, analytics, and data warehouse use cases.
   image: https://www.oracle.com/a/ocom/img/social-og-oracle-cloud.jpg
   humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmro/index.html
@@ -101,18 +102,16 @@ apis:
     url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
   - type: Reference
     url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
-- aid: oracle-transportation-management:oracle-transportation-management-shipmentorders-api
-  name: Oracle Transportation Management ShipmentOrders API
+- aid: oracle-transportation-management:oracle-transportation-management-shipment-orders-api
+  name: Oracle Transportation Management Shipment Orders API
   description: Shipment order management
-  humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
+  humanURL: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmro/index.html
   baseURL: https://{host}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1
   tags:
   - Shipment Orders
-  tags_raw:
-  - ShipmentOrders
   properties:
   - type: OpenAPI
-    url: openapi/oracle-transportation-management-shipmentorders-api-openapi.yml
+    url: openapi/oracle-transportation-management-shipment-orders-api-openapi.yml
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/index.html
   - type: Reference
