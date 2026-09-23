@@ -1,10 +1,7 @@
 {
   "provider": "oracle-transportation-management",
   "sources": [
-    "oracle-transportation-management-carriers-api-openapi.yml",
-    "oracle-transportation-management-locations-api-openapi.yml",
-    "oracle-transportation-management-rates-api-openapi.yml",
-    "oracle-transportation-management-shipmentorders-api-openapi.yml"
+    "_original/oracle-otm-business-objects-openapi.yml"
   ],
   "outputs": [
     "oracle-transportation-management-carriers-api-openapi.yml",
@@ -12,9 +9,21 @@
     "oracle-transportation-management-rates-api-openapi.yml",
     "oracle-transportation-management-shipmentorders-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "oracle-otm-business-objects-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: oracle-transportation-management-shipment-orders-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 5 total)"
+  ],
+  "skipped": [
+    "oracle-transportation-management-carriers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-transportation-management-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-transportation-management-rates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-transportation-management-shipment-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Oracle Transportation Management Business Object Resources REST Carriers Rates API
+  title: Oracle Transportation Management Business Object Resources…
   description: Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.
   version: 26b.0.0
   contact:
