@@ -95,6 +95,13 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
     Carrier:
       type: object
       properties:
@@ -129,13 +136,6 @@ components:
         insertDate:
           type: string
           format: date-time
-    Error:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
   parameters:
     GidParam:
       name: gid

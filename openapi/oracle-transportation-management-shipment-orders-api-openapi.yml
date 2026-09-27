@@ -163,6 +163,92 @@ paths:
           description: Deleted
 components:
   schemas:
+    ShipmentOrderUpdate:
+      type: object
+      properties:
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+    ShipmentOrderLineCreate:
+      type: object
+      required:
+      - lineNumber
+      - quantity
+      - quantityUom
+      properties:
+        lineNumber:
+          type: integer
+        itemGid:
+          type: string
+        itemDescription:
+          type: string
+        quantity:
+          type: number
+          format: double
+        quantityUom:
+          type: string
+        weight:
+          type: number
+          format: double
+        weightUom:
+          type: string
+    ShipmentOrderCreate:
+      type: object
+      required:
+      - shipmentOrderXid
+      - sourceLocationGid
+      - destLocationGid
+      - earlyPickupDate
+      - lateDeliveryDate
+      properties:
+        shipmentOrderXid:
+          type: string
+        sourceLocationGid:
+          type: string
+        destLocationGid:
+          type: string
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+        transportationMode:
+          type: string
+          enum:
+          - LTL
+          - TL
+          - OCEAN
+          - AIR
+          - RAIL
+          - PARCEL
+          - INTERMODAL
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentOrderLineCreate'
     ShipmentOrder:
       type: object
       description: An OTM shipment order (order to move)
@@ -259,36 +345,6 @@ components:
           type: string
         packageType:
           type: string
-    ShipmentOrderLineCreate:
-      type: object
-      required:
-      - lineNumber
-      - quantity
-      - quantityUom
-      properties:
-        lineNumber:
-          type: integer
-        itemGid:
-          type: string
-        itemDescription:
-          type: string
-        quantity:
-          type: number
-          format: double
-        quantityUom:
-          type: string
-        weight:
-          type: number
-          format: double
-        weightUom:
-          type: string
-    Error:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
     ShipmentOrderDetail:
       allOf:
       - $ref: '#/components/schemas/ShipmentOrder'
@@ -307,62 +363,6 @@ components:
                   type: string
                 refValue:
                   type: string
-    ShipmentOrderCreate:
-      type: object
-      required:
-      - shipmentOrderXid
-      - sourceLocationGid
-      - destLocationGid
-      - earlyPickupDate
-      - lateDeliveryDate
-      properties:
-        shipmentOrderXid:
-          type: string
-        sourceLocationGid:
-          type: string
-        destLocationGid:
-          type: string
-        earlyPickupDate:
-          type: string
-          format: date-time
-        latePickupDate:
-          type: string
-          format: date-time
-        earlyDeliveryDate:
-          type: string
-          format: date-time
-        lateDeliveryDate:
-          type: string
-          format: date-time
-        transportationMode:
-          type: string
-          enum:
-          - LTL
-          - TL
-          - OCEAN
-          - AIR
-          - RAIL
-          - PARCEL
-          - INTERMODAL
-        lines:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentOrderLineCreate'
-    ShipmentOrderUpdate:
-      type: object
-      properties:
-        earlyPickupDate:
-          type: string
-          format: date-time
-        latePickupDate:
-          type: string
-          format: date-time
-        earlyDeliveryDate:
-          type: string
-          format: date-time
-        lateDeliveryDate:
-          type: string
-          format: date-time
   responses:
     Unauthorized:
       description: Authentication required
