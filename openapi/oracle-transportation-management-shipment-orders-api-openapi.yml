@@ -163,34 +163,8 @@ paths:
           description: Deleted
 components:
   schemas:
-    ShipmentOrderUpdate:
+    ShipmentOrderLine:
       type: object
-      properties:
-        earlyPickupDate:
-          type: string
-          format: date-time
-        latePickupDate:
-          type: string
-          format: date-time
-        earlyDeliveryDate:
-          type: string
-          format: date-time
-        lateDeliveryDate:
-          type: string
-          format: date-time
-    Error:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-    ShipmentOrderLineCreate:
-      type: object
-      required:
-      - lineNumber
-      - quantity
-      - quantityUom
       properties:
         lineNumber:
           type: integer
@@ -207,6 +181,13 @@ components:
           type: number
           format: double
         weightUom:
+          type: string
+        volume:
+          type: number
+          format: double
+        volumeUom:
+          type: string
+        packageType:
           type: string
     ShipmentOrderCreate:
       type: object
@@ -249,6 +230,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ShipmentOrderLineCreate'
+    ShipmentOrderLineCreate:
+      type: object
+      required:
+      - lineNumber
+      - quantity
+      - quantityUom
+      properties:
+        lineNumber:
+          type: integer
+        itemGid:
+          type: string
+        itemDescription:
+          type: string
+        quantity:
+          type: number
+          format: double
+        quantityUom:
+          type: string
+        weight:
+          type: number
+          format: double
+        weightUom:
+          type: string
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
     ShipmentOrder:
       type: object
       description: An OTM shipment order (order to move)
@@ -319,32 +330,21 @@ components:
         lastUpdateDate:
           type: string
           format: date-time
-    ShipmentOrderLine:
+    ShipmentOrderUpdate:
       type: object
       properties:
-        lineNumber:
-          type: integer
-        itemGid:
+        earlyPickupDate:
           type: string
-        itemDescription:
+          format: date-time
+        latePickupDate:
           type: string
-        quantity:
-          type: number
-          format: double
-        quantityUom:
+          format: date-time
+        earlyDeliveryDate:
           type: string
-        weight:
-          type: number
-          format: double
-        weightUom:
+          format: date-time
+        lateDeliveryDate:
           type: string
-        volume:
-          type: number
-          format: double
-        volumeUom:
-          type: string
-        packageType:
-          type: string
+          format: date-time
     ShipmentOrderDetail:
       allOf:
       - $ref: '#/components/schemas/ShipmentOrder'
@@ -364,8 +364,8 @@ components:
                 refValue:
                   type: string
   responses:
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -376,8 +376,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:

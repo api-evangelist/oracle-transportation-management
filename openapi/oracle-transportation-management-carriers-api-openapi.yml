@@ -82,18 +82,27 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    GidParam:
+      name: gid
+      in: path
+      required: true
+      description: OTM Global Identifier (domainName.xid format)
+      schema:
+        type: string
+        pattern: ^[A-Z0-9_]+\.[A-Z0-9_-]+$
   schemas:
     Error:
       type: object
@@ -136,15 +145,6 @@ components:
         insertDate:
           type: string
           format: date-time
-  parameters:
-    GidParam:
-      name: gid
-      in: path
-      required: true
-      description: OTM Global Identifier (domainName.xid format)
-      schema:
-        type: string
-        pattern: ^[A-Z0-9_]+\.[A-Z0-9_-]+$
   securitySchemes:
     oauth2:
       type: oauth2
