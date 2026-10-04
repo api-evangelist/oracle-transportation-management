@@ -189,21 +189,9 @@ components:
           type: string
         packageType:
           type: string
-    ShipmentOrderCreate:
+    ShipmentOrderUpdate:
       type: object
-      required:
-      - shipmentOrderXid
-      - sourceLocationGid
-      - destLocationGid
-      - earlyPickupDate
-      - lateDeliveryDate
       properties:
-        shipmentOrderXid:
-          type: string
-        sourceLocationGid:
-          type: string
-        destLocationGid:
-          type: string
         earlyPickupDate:
           type: string
           format: date-time
@@ -216,50 +204,6 @@ components:
         lateDeliveryDate:
           type: string
           format: date-time
-        transportationMode:
-          type: string
-          enum:
-          - LTL
-          - TL
-          - OCEAN
-          - AIR
-          - RAIL
-          - PARCEL
-          - INTERMODAL
-        lines:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentOrderLineCreate'
-    ShipmentOrderLineCreate:
-      type: object
-      required:
-      - lineNumber
-      - quantity
-      - quantityUom
-      properties:
-        lineNumber:
-          type: integer
-        itemGid:
-          type: string
-        itemDescription:
-          type: string
-        quantity:
-          type: number
-          format: double
-        quantityUom:
-          type: string
-        weight:
-          type: number
-          format: double
-        weightUom:
-          type: string
-    Error:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
     ShipmentOrder:
       type: object
       description: An OTM shipment order (order to move)
@@ -330,9 +274,21 @@ components:
         lastUpdateDate:
           type: string
           format: date-time
-    ShipmentOrderUpdate:
+    ShipmentOrderCreate:
       type: object
+      required:
+      - shipmentOrderXid
+      - sourceLocationGid
+      - destLocationGid
+      - earlyPickupDate
+      - lateDeliveryDate
       properties:
+        shipmentOrderXid:
+          type: string
+        sourceLocationGid:
+          type: string
+        destLocationGid:
+          type: string
         earlyPickupDate:
           type: string
           format: date-time
@@ -345,6 +301,50 @@ components:
         lateDeliveryDate:
           type: string
           format: date-time
+        transportationMode:
+          type: string
+          enum:
+          - LTL
+          - TL
+          - OCEAN
+          - AIR
+          - RAIL
+          - PARCEL
+          - INTERMODAL
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentOrderLineCreate'
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+    ShipmentOrderLineCreate:
+      type: object
+      required:
+      - lineNumber
+      - quantity
+      - quantityUom
+      properties:
+        lineNumber:
+          type: integer
+        itemGid:
+          type: string
+        itemDescription:
+          type: string
+        quantity:
+          type: number
+          format: double
+        quantityUom:
+          type: string
+        weight:
+          type: number
+          format: double
+        weightUom:
+          type: string
     ShipmentOrderDetail:
       allOf:
       - $ref: '#/components/schemas/ShipmentOrder'
@@ -363,15 +363,24 @@ components:
                   type: string
                 refValue:
                   type: string
+  parameters:
+    GidParam:
+      name: gid
+      in: path
+      required: true
+      description: OTM Global Identifier (domainName.xid format)
+      schema:
+        type: string
+        pattern: ^[A-Z0-9_]+\.[A-Z0-9_-]+$
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -382,15 +391,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    GidParam:
-      name: gid
-      in: path
-      required: true
-      description: OTM Global Identifier (domainName.xid format)
-      schema:
-        type: string
-        pattern: ^[A-Z0-9_]+\.[A-Z0-9_-]+$
   securitySchemes:
     oauth2:
       type: oauth2
