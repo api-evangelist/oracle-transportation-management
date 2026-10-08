@@ -121,6 +121,12 @@ apis:
   - type: Reference
     url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
 common:
+- type: Plans
+  url: plans/oracle-transportation-management-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/oracle-transportation-management-rate-limits.yml
+- type: FinOps
+  url: finops/oracle-transportation-management-finops.yml
 - type: CapabilityMap
   url: capabilities/oracle-transportation-management-capability-edges.yml
   name: Oracle Transportation Management Business Capability Map
