@@ -163,8 +163,34 @@ paths:
           description: Deleted
 components:
   schemas:
-    ShipmentOrderLine:
+    Error:
       type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+    ShipmentOrderUpdate:
+      type: object
+      properties:
+        earlyPickupDate:
+          type: string
+          format: date-time
+        latePickupDate:
+          type: string
+          format: date-time
+        earlyDeliveryDate:
+          type: string
+          format: date-time
+        lateDeliveryDate:
+          type: string
+          format: date-time
+    ShipmentOrderLineCreate:
+      type: object
+      required:
+      - lineNumber
+      - quantity
+      - quantityUom
       properties:
         lineNumber:
           type: integer
@@ -182,28 +208,6 @@ components:
           format: double
         weightUom:
           type: string
-        volume:
-          type: number
-          format: double
-        volumeUom:
-          type: string
-        packageType:
-          type: string
-    ShipmentOrderUpdate:
-      type: object
-      properties:
-        earlyPickupDate:
-          type: string
-          format: date-time
-        latePickupDate:
-          type: string
-          format: date-time
-        earlyDeliveryDate:
-          type: string
-          format: date-time
-        lateDeliveryDate:
-          type: string
-          format: date-time
     ShipmentOrder:
       type: object
       description: An OTM shipment order (order to move)
@@ -274,6 +278,32 @@ components:
         lastUpdateDate:
           type: string
           format: date-time
+    ShipmentOrderLine:
+      type: object
+      properties:
+        lineNumber:
+          type: integer
+        itemGid:
+          type: string
+        itemDescription:
+          type: string
+        quantity:
+          type: number
+          format: double
+        quantityUom:
+          type: string
+        weight:
+          type: number
+          format: double
+        weightUom:
+          type: string
+        volume:
+          type: number
+          format: double
+        volumeUom:
+          type: string
+        packageType:
+          type: string
     ShipmentOrderCreate:
       type: object
       required:
@@ -315,36 +345,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ShipmentOrderLineCreate'
-    Error:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-    ShipmentOrderLineCreate:
-      type: object
-      required:
-      - lineNumber
-      - quantity
-      - quantityUom
-      properties:
-        lineNumber:
-          type: integer
-        itemGid:
-          type: string
-        itemDescription:
-          type: string
-        quantity:
-          type: number
-          format: double
-        quantityUom:
-          type: string
-        weight:
-          type: number
-          format: double
-        weightUom:
-          type: string
     ShipmentOrderDetail:
       allOf:
       - $ref: '#/components/schemas/ShipmentOrder'
@@ -363,15 +363,6 @@ components:
                   type: string
                 refValue:
                   type: string
-  parameters:
-    GidParam:
-      name: gid
-      in: path
-      required: true
-      description: OTM Global Identifier (domainName.xid format)
-      schema:
-        type: string
-        pattern: ^[A-Z0-9_]+\.[A-Z0-9_-]+$
   responses:
     BadRequest:
       description: Invalid request
@@ -391,6 +382,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    GidParam:
+      name: gid
+      in: path
+      required: true
+      description: OTM Global Identifier (domainName.xid format)
+      schema:
+        type: string
+        pattern: ^[A-Z0-9_]+\.[A-Z0-9_-]+$
   securitySchemes:
     oauth2:
       type: oauth2
