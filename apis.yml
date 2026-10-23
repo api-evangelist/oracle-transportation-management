@@ -121,6 +121,8 @@ apis:
   - type: Reference
     url: https://docs.oracle.com/en/cloud/saas/transportation/26b/otmra/rest-endpoints.html
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/oracle-transportation-management/overview
 - type: Plans
   url: plans/oracle-transportation-management-plans-pricing.yml
 - type: RateLimits
