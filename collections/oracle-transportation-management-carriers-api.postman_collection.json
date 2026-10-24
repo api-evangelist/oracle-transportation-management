@@ -1,83 +1,231 @@
 {
+  "info": {
+    "_postman_id": "eb73f309-da72-4eed-b266-1950cc3efef6",
+    "name": "Oracle Transportation Management Business Object Resources\u2026",
+    "description": "Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.\n\nContact Support:\n Name: Oracle Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:48:13.000Z",
+    "updatedAt": "2026-10-21T19:48:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-eb73f309-da72-4eed-b266-1950cc3efef6"
+  },
   "item": [
     {
-      "id": "5ee08bb8-bc0c-4331-ae7a-b65c346fd691",
-      "name": "Carriers",
-      "description": {
-        "content": "Carrier master data",
-        "type": "text/plain"
-      },
+      "name": "carriers",
       "item": [
         {
-          "id": "4c904b28-abff-4587-9acc-8cc22b1a4d78",
-          "name": "List carriers",
-          "request": {
-            "name": "List carriers",
-            "description": {
-              "content": "Returns carrier master data including SCAC codes and service levels.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "carriers"
+          "name": "{gid}",
+          "item": [
+            {
+              "name": "Get a carrier",
+              "id": "eedc4d5d-42e1-4acc-abfe-c236fe397583",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/carriers/:gid",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carriers",
+                    ":gid"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3e27ffb0-ed12-4ba5-865e-6f49ae04dfb5",
+                      "key": "gid",
+                      "value": "TZGL9TLZPA.SC",
+                      "description": "(Required) OTM Global Identifier (domainName.xid format)"
+                    }
+                  ]
+                },
+                "description": "Returns carrier details including service offerings and contact information."
+              },
+              "response": [
+                {
+                  "id": "5470dfa2-5821-415b-96f4-6f97a84b4b32",
+                  "name": "Carrier details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/carriers/:gid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "carriers",
+                        ":gid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "gid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"servprovGid\": \"<string>\",\n  \"servprovXid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"scacCode\": \"<string>\",\n  \"status\": \"A\",\n  \"transportationModes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contactName\": \"<string>\",\n  \"contactPhone\": \"<string>\",\n  \"contactEmail\": \"<email>\",\n  \"insertDate\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-21T19:48:14.000Z",
+                  "updatedAt": "2026-10-21T19:48:14.000Z",
+                  "uid": "35240-5470dfa2-5821-415b-96f4-6f97a84b4b32"
+                },
+                {
+                  "id": "a0b3287c-aa1e-464d-8690-b1e46eb4169c",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/carriers/:gid",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "carriers",
+                        ":gid"
+                      ],
+                      "variable": [
+                        {
+                          "key": "gid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T19:48:14.000Z",
+                  "updatedAt": "2026-10-21T19:48:14.000Z",
+                  "uid": "35240-a0b3287c-aa1e-464d-8690-b1e46eb4169c"
+                }
               ],
+              "createdAt": "2026-10-21T19:48:14.000Z",
+              "updatedAt": "2026-10-21T19:48:14.000Z",
+              "uid": "35240-eedc4d5d-42e1-4acc-abfe-c236fe397583"
+            }
+          ],
+          "id": "738e4d19-e40c-4490-ae2f-a552f17c2af5",
+          "createdAt": "2026-10-21T19:48:14.000Z",
+          "updatedAt": "2026-10-21T19:48:14.000Z",
+          "uid": "35240-738e4d19-e40c-4490-ae2f-a552f17c2af5"
+        },
+        {
+          "name": "List carriers",
+          "id": "c1d08fd9-4f4c-4761-9820-5a2213c7bdfa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/carriers?status=I&offset=0&limit=100",
               "host": [
                 "{{baseUrl}}"
               ],
+              "path": [
+                "carriers"
+              ],
               "query": [
                 {
-                  "disabled": false,
                   "key": "status",
-                  "value": "<string>"
+                  "value": "I"
                 },
                 {
-                  "disabled": false,
                   "key": "offset",
                   "value": "0"
                 },
                 {
-                  "disabled": false,
                   "key": "limit",
                   "value": "100"
                 }
-              ],
-              "variable": [
-                {
-                  "description": {
-                    "content": "",
-                    "type": "text/plain"
-                  },
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Returns carrier master data including SCAC codes and service levels."
           },
           "response": [
             {
-              "id": "07181afe-a20a-488e-8b4c-32748854a3c1",
+              "id": "813d549c-4248-4933-892c-6ad6499a255b",
               "name": "Carrier list",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "carriers"
-                  ],
+                  "raw": "{{baseUrl}}/carriers?status=I&offset=0&limit=100",
                   "host": [
                     "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carriers"
                   ],
                   "query": [
                     {
                       "key": "status",
-                      "value": "<string>"
+                      "value": "I"
                     },
                     {
                       "key": "offset",
@@ -87,63 +235,53 @@
                       "key": "limit",
                       "value": "100"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
-                      },
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"carriers\": [\n    {\n      \"servprovGid\": \"string\",\n      \"servprovXid\": \"string\",\n      \"name\": \"string\",\n      \"scacCode\": \"stri\",\n      \"status\": \"I\",\n      \"transportationModes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"contactName\": \"string\",\n      \"contactPhone\": \"string\",\n      \"contactEmail\": \"1XCak4Ij@gFlgAPSSaaioKSyxxwckSDSkEWvLLWQw.tke\",\n      \"insertDate\": \"1995-07-29T18:10:50.699Z\"\n    },\n    {\n      \"servprovGid\": \"string\",\n      \"servprovXid\": \"string\",\n      \"name\": \"string\",\n      \"scacCode\": \"stri\",\n      \"status\": \"I\",\n      \"transportationModes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"contactName\": \"string\",\n      \"contactPhone\": \"string\",\n      \"contactEmail\": \"A-95@PxqLnNCmbMp.wgs\",\n      \"insertDate\": \"2007-05-29T17:53:29.649Z\"\n    }\n  ],\n  \"totalCount\": 2765\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"carriers\": [\n    {\n      \"servprovGid\": \"<string>\",\n      \"servprovXid\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scacCode\": \"<string>\",\n      \"status\": \"I\",\n      \"transportationModes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contactName\": \"<string>\",\n      \"contactPhone\": \"<string>\",\n      \"contactEmail\": \"<email>\",\n      \"insertDate\": \"<dateTime>\"\n    },\n    {\n      \"servprovGid\": \"<string>\",\n      \"servprovXid\": \"<string>\",\n      \"name\": \"<string>\",\n      \"scacCode\": \"<string>\",\n      \"status\": \"A\",\n      \"transportationModes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"contactName\": \"<string>\",\n      \"contactPhone\": \"<string>\",\n      \"contactEmail\": \"<email>\",\n      \"insertDate\": \"<dateTime>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T19:48:14.000Z",
+              "updatedAt": "2026-10-21T19:48:14.000Z",
+              "uid": "35240-813d549c-4248-4933-892c-6ad6499a255b"
             },
             {
-              "id": "b77a51bc-a2b8-409d-8a76-91435bab1add",
+              "id": "2efc2201-e42e-4816-b67c-79ce786602e9",
               "name": "Authentication required",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "carriers"
-                  ],
+                  "raw": "{{baseUrl}}/carriers?status=I&offset=0&limit=100",
                   "host": [
                     "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "carriers"
                   ],
                   "query": [
                     {
                       "key": "status",
-                      "value": "<string>"
+                      "value": "I"
                     },
                     {
                       "key": "offset",
@@ -153,248 +291,35 @@
                       "key": "limit",
                       "value": "100"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
-                      },
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T19:48:14.000Z",
+              "updatedAt": "2026-10-21T19:48:14.000Z",
+              "uid": "35240-2efc2201-e42e-4816-b67c-79ce786602e9"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6f5919f1-22c6-408d-bc83-0edf19c68ea8",
-          "name": "Get a carrier",
-          "request": {
-            "name": "Get a carrier",
-            "description": {
-              "content": "Returns carrier details including service offerings and contact information.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "carriers",
-                ":gid"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "gid",
-                  "description": "(Required) OTM Global Identifier (domainName.xid format)"
-                },
-                {
-                  "description": {
-                    "content": "",
-                    "type": "text/plain"
-                  },
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a2ca002a-17f3-4e00-bcca-e7823505d077",
-              "name": "Carrier details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "carriers",
-                    ":gid"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "gid",
-                      "description": "(Required) OTM Global Identifier (domainName.xid format)"
-                    },
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
-                      },
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"servprovGid\": \"string\",\n  \"servprovXid\": \"string\",\n  \"name\": \"string\",\n  \"scacCode\": \"stri\",\n  \"status\": \"I\",\n  \"transportationModes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"contactName\": \"string\",\n  \"contactPhone\": \"string\",\n  \"contactEmail\": \"MhdHRjy@MqZmgKETNDYUxvJIZRsPdaFGNK.iu\",\n  \"insertDate\": \"1977-07-18T14:45:18.636Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f7943d5e-96be-472e-ba5e-59550d38014d",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "carriers",
-                    ":gid"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "gid",
-                      "description": "(Required) OTM Global Identifier (domainName.xid format)"
-                    },
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
-                      },
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T19:48:14.000Z",
+          "updatedAt": "2026-10-21T19:48:14.000Z",
+          "uid": "35240-c1d08fd9-4f4c-4761-9820-5a2213c7bdfa"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "otm.example.com",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1",
-      "key": "baseUrl"
+      "id": "e8f43ecd-548c-455c-abf3-da04d73bce77",
+      "createdAt": "2026-10-21T19:48:14.000Z",
+      "updatedAt": "2026-10-21T19:48:14.000Z",
+      "uid": "35240-e8f43ecd-548c-455c-abf3-da04d73bce77"
     }
   ],
   "auth": {
@@ -402,25 +327,29 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "otm.read otm.write"
+        "value": "otm.read otm.write",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://login.oracle.com/oauth2/v1/token"
+        "value": "https://login.oracle.com/oauth2/v1/token",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "client_credentials"
+        "value": "client_credentials",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "1664825c-b459-4c04-8903-34b99d13f9d4",
-    "name": "Oracle Transportation Management Business Object Resources REST Carriers API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.\n\nContact Support:\n Name: Oracle Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "otm.example.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1"
     }
-  }
+  ]
 }

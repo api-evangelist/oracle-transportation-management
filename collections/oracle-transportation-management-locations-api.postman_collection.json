@@ -1,83 +1,85 @@
 {
+  "info": {
+    "_postman_id": "a4f5e3e6-d8d8-43b3-b212-5ddca36312c1",
+    "name": "Oracle Transportation Management Business Object Resources\u2026",
+    "description": "Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.\n\nContact Support:\n Name: Oracle Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:48:19.000Z",
+    "updatedAt": "2026-10-21T19:48:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a4f5e3e6-d8d8-43b3-b212-5ddca36312c1"
+  },
   "item": [
     {
-      "id": "734cc98c-7f4b-4e36-883f-3021080af0fb",
-      "name": "Locations",
-      "description": {
-        "content": "Location master data",
-        "type": "text/plain"
-      },
+      "name": "locations",
       "item": [
         {
-          "id": "9a64c9fe-478f-42be-b532-46b811fb345f",
           "name": "List locations",
+          "id": "69d92e2f-513e-451b-ba91-e1bd739dc91e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List locations",
-            "description": {
-              "content": "Returns location master data including addresses and coordinates.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "locations"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "locationType",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "country",
-                  "value": "<string>"
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "100"
-                }
-              ],
-              "variable": [
-                {
-                  "description": {
-                    "content": "",
-                    "type": "text/plain"
-                  },
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/locations?locationType=<string>&country=<string>&offset=0&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "locations"
+              ],
+              "query": [
+                {
+                  "key": "locationType",
+                  "value": "<string>"
+                },
+                {
+                  "key": "country",
+                  "value": "<string>"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Returns location master data including addresses and coordinates."
           },
           "response": [
             {
-              "id": "aaf799d4-db90-46c5-ab3d-62fe5faf112c",
+              "id": "3376c577-b3f6-4b65-94eb-236cdee5711e",
               "name": "Location list",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "locations"
-                  ],
+                  "raw": "{{baseUrl}}/locations?locationType=<string>&country=<string>&offset=0&limit=100",
                   "host": [
                     "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "locations"
                   ],
                   "query": [
                     {
@@ -96,73 +98,35 @@
                       "key": "limit",
                       "value": "100"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
-                      },
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"locations\": [\n    {\n      \"locationGid\": \"string\",\n      \"locationXid\": \"string\",\n      \"locationName\": \"string\",\n      \"locationType\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"province\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"str\",\n      \"latitude\": 4384.433619810462,\n      \"longitude\": 7732.470654213014\n    },\n    {\n      \"locationGid\": \"string\",\n      \"locationXid\": \"string\",\n      \"locationName\": \"string\",\n      \"locationType\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"province\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"str\",\n      \"latitude\": 9629.108146443885,\n      \"longitude\": 3075.7466703774603\n    }\n  ],\n  \"totalCount\": 2008\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"locations\": [\n    {\n      \"locationGid\": \"<string>\",\n      \"locationXid\": \"<string>\",\n      \"locationName\": \"<string>\",\n      \"locationType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"province\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\"\n    },\n    {\n      \"locationGid\": \"<string>\",\n      \"locationXid\": \"<string>\",\n      \"locationName\": \"<string>\",\n      \"locationType\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"province\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"country\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T19:48:19.000Z",
+              "updatedAt": "2026-10-21T19:48:19.000Z",
+              "uid": "35240-3376c577-b3f6-4b65-94eb-236cdee5711e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T19:48:19.000Z",
+          "updatedAt": "2026-10-21T19:48:19.000Z",
+          "uid": "35240-69d92e2f-513e-451b-ba91-e1bd739dc91e"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "otm.example.com",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1",
-      "key": "baseUrl"
+      "id": "1ed0a357-6698-4337-a55d-fe0ef7914310",
+      "createdAt": "2026-10-21T19:48:19.000Z",
+      "updatedAt": "2026-10-21T19:48:19.000Z",
+      "uid": "35240-1ed0a357-6698-4337-a55d-fe0ef7914310"
     }
   ],
   "auth": {
@@ -170,25 +134,29 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "otm.read otm.write"
+        "value": "otm.read otm.write",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://login.oracle.com/oauth2/v1/token"
+        "value": "https://login.oracle.com/oauth2/v1/token",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "client_credentials"
+        "value": "client_credentials",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "2031cb69-786d-440b-910f-65afa562076a",
-    "name": "Oracle Transportation Management Business Object Resources REST Carriers Locations API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Oracle Transportation Management (OTM) Business Object Resources REST API provides programmatic access to shipment orders, carriers, lanes, rates, transportation plans, and logistics data in Oracle Fusion Cloud Transportation and Global Trade Management.\n\nContact Support:\n Name: Oracle Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "otm.example.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}/GC3/glog.integration.servlet.WMServlet/otm/rest/v1"
     }
-  }
+  ]
 }
